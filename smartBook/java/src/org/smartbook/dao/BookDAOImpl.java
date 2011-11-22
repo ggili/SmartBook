@@ -1,6 +1,5 @@
 package org.smartbook.dao;
 
-import org.hibernate.SessionFactory;
 import org.smartbook.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;

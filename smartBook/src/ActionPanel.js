@@ -15,8 +15,10 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
         });
         treeNode.on('click', function()
         {
-            var booksGrid = new BookGridComponent().createBookGrid();
-            smartBookApplication.open(booksGrid);
+            var bookGridComponent = new BookGridComponent();
+            var booksGridFormComponent = new BookGridForm(bookGridComponent, smartBookApplication);
+            var booksGridForm = booksGridFormComponent.createGridForm();
+            smartBookApplication.open(booksGridForm);
         });
 
 

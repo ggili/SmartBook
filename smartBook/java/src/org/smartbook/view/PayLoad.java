@@ -17,9 +17,14 @@ public class PayLoad
         this(success, 0, null);
     }
 
+    public PayLoad(List<?> dataList)
+    {
+        this(true, dataList.size(), dataList);
+    }
+
     public PayLoad(Object data)
     {
-        this(true, 0, data);
+        this(true, 1, data);
     }
 
     public PayLoad(boolean success, long total, Object data)

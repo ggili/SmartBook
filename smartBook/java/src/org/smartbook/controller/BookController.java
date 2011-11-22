@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -40,6 +41,15 @@ public class BookController
     public PayLoad removeBook(@RequestBody Long bookId)
     {
         bookService.removeBook(bookId);
+
+        return new PayLoad(true);
+    }
+
+    @RequestMapping(value = "/books/assignBookToCategories.do")
+    @ResponseBody
+    public PayLoad assignBookToCategories(@RequestParam String[] categories, @RequestParam Long bookId)
+    {
+//        bookService.assignBookToCategories(categoriesString);
 
         return new PayLoad(true);
     }

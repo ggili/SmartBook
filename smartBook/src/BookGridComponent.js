@@ -17,7 +17,8 @@ BookGridComponent.prototype =
                 {name: 'author', mapping: 'author'},
                 {name: 'isbn', mapping: 'isbn'},
                 {name: 'publisher', mapping: 'publisher'},
-                {name: 'publishYear', mapping: 'publishYear'}
+                {name: 'publishYear', mapping: 'publishYear'},
+                {name: 'categoriesString', mapping: 'categoriesString'}
             ]
         });
 
@@ -26,7 +27,6 @@ BookGridComponent.prototype =
         });
 
         this.rowEditor = new Ext.ux.grid.RowEditor({saveText :'Update'});
-
 
         this.grid = new Ext.grid.GridPanel({
                     store: new Ext.data.Store({
@@ -45,7 +45,7 @@ BookGridComponent.prototype =
                     plugins: [this.rowEditor],
                     colModel: new Ext.grid.ColumnModel({
                         defaults: {
-                            width: 120,
+                            width: 200,
                             sortable: true
                         },
                         columns: [
@@ -53,8 +53,12 @@ BookGridComponent.prototype =
                             {header: 'Author', dataIndex: 'author', editor: new Ext.form.TextField(), allowBlank: false},
                             {header: 'Isbn', dataIndex: 'isbn', editor: new Ext.form.TextField(), allowBlank: false},
                             {header: 'Publisher', dataIndex: 'publisher', editor: new Ext.form.TextField(), allowBlank: false},
-                            {header: 'Publish Year', dataIndex: 'publishYear', editor: new Ext.form.TextField(), allowBlank: false}
+                            {header: 'Publish Year', dataIndex: 'publishYear', editor: new Ext.form.TextField(), allowBlank: false},
+                            {hidden: true, dataIndex: 'categoriesString'}
                         ]
+                    }),
+                    selModel: new Ext.grid.RowSelectionModel({
+                        singleSelect: true
                     }),
                     tbar: new Ext.Toolbar({
                         items:[
@@ -114,7 +118,8 @@ BookGridComponent.prototype =
             {name: 'author'},
             {name: 'isbn'},
             {name: 'publisher'},
-            {name: 'publishYear'}
+            {name: 'publishYear'},
+            {name: 'categoriesString'}
         ]);
 
         var newBook = new Book({
@@ -122,7 +127,8 @@ BookGridComponent.prototype =
             author: 'newAuthor',
             isbn: 'newIsbn',
             publisher: 'newPublisher',
-            publishYear: '2012'
+            publishYear: '2012',
+            categoriesString: ''
         });
 
         this.stopEditing();

@@ -1,6 +1,7 @@
 package org.smartbook.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -8,6 +9,12 @@ import javax.persistence.*;
 @SequenceGenerator(name = "seq", sequenceName = "s_book")
 public class Book
 {
+    private static final String DELIMITER = ",";
+    @Id
+    @GeneratedValue(generator = "seq")
+    @Column(name = "ID")
+    private Long id;
+
     @Column(name = "TITLE")
     private String title;
 
@@ -20,13 +27,15 @@ public class Book
     @Column(name = "PUBLISH_YEAR")
     private String publishYear;
 
-    @Id
-    @GeneratedValue(generator = "seq")
-    @Column(name = "ID")
-    private Long id;
-
     @Column(name = "ISBN")
     private String isbn;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "BOOK_CATEGORY", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
+    private List<Category> categories;
+
+    @Transient
+    private String categoriesString;
 
     public Book()
     {
@@ -94,5 +103,33 @@ public class Book
     public Long getId()
     {
         return id;
+    }
+
+    public String getCategoriesString()
+    {
+        categoriesString = categoriesToString();
+
+        return categoriesString;
+    }
+
+    public void setCategoriesString(String categoriesString)
+    {
+        this.categoriesString = categoriesString;
+    }
+
+    private String categoriesToString()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Category category : categories)
+        {
+            stringBuilder.append(category.getName());
+            stringBuilder.append(DELIMITER);
+        }
+        if (stringBuilder.length() > 0)
+        {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
+
+        return stringBuilder.toString();
     }
 }
