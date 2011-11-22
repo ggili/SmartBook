@@ -21,15 +21,12 @@ BookGridComponent.prototype =
             ]
         });
 
-        var myWriter = new Ext.data.JsonWriter({
+        var myWriter = new PlainJsonWriter({
             writeAllFields: true
         });
 
         this.rowEditor = new Ext.ux.grid.RowEditor({saveText :'Update'});
-        this.rowEditor.on("afteredit", function(changes, s, record)
-        {
-            record.commit();
-        }, this);
+
 
         this.grid = new Ext.grid.GridPanel({
                     store: new Ext.data.Store({
@@ -37,7 +34,7 @@ BookGridComponent.prototype =
                         autoSave: true,
                         reader: myReader,
                         writer: myWriter,
-                        proxy : new Ext.data.HttpProxy({headers: { 'Content-Type': 'application/json' }, api:{
+                        proxy : new PlainBodyHttpProxy({headers: { 'Content-Type': 'application/json' }, api:{
                             load: {url: '/books/view.do'},
                             read: {url: '/books/view.do'},
                             create: {url: '/books/save.do'},
@@ -77,6 +74,11 @@ BookGridComponent.prototype =
                     })
                 }
         );
+
+        this.rowEditor.on("afteredit", function(changes, s, record)
+        {
+            record.commit();
+        }, this);
 
         this.grid.getStore().load();
 
@@ -125,7 +127,6 @@ BookGridComponent.prototype =
 
         this.stopEditing();
         this.grid.getStore().insert(0, newBook);
-        newBook.commit();
         this.grid.getView().refresh();
         this.grid.getSelectionModel().selectRow(0);
         this.startEditing(0);

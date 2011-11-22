@@ -28,9 +28,11 @@ public class BookController
 
     @ResponseBody
     @RequestMapping(value = "/books/save.do")
-    public void saveBook(@RequestBody Book book)
+    public PayLoad saveBook(@RequestBody Book book)
     {
         bookService.saveBook(book);
+
+        return new PayLoad(book);
     }
 
     @RequestMapping(value = "/books/remove.do")
