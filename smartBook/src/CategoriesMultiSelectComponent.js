@@ -37,8 +37,7 @@ CategoriesMultiSelectComponent = Ext.extend(Object, {
                         {
                             Ext.Ajax.request({
                                 url: '/books/assignBookToCategories.do',
-                                params: Ext.encode({categories: this.categoryMultiSelect.getRawValue(), bookId: selectionModel.getSelected().id}),
-                                headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                                params: {categories: this.categoryMultiSelect.getRawValue(), bookId: selectionModel.getSelected().id}
                             });
                         },
                         scope: this
