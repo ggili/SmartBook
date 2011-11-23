@@ -132,4 +132,9 @@ public class Book
 
         return stringBuilder.toString();
     }
+
+    public void setCategories(List<Category> categories)
+    {
+        this.categories = categories;
+    }
 }

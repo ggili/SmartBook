@@ -49,7 +49,7 @@ public class BookController
     @ResponseBody
     public PayLoad assignBookToCategories(@RequestParam String[] categories, @RequestParam Long bookId)
     {
-//        bookService.assignBookToCategories(categoriesString);
+        bookService.assignBookToCategories(categories, bookId);
 
         return new PayLoad(true);
     }

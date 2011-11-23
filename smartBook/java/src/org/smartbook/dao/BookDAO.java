@@ -12,4 +12,6 @@ public interface BookDAO
     Book saveBook(Book book);
 
     void removeBook(Long bookId);
+
+    void assignBookToCategories(String[] categories, Long bookId);
 }

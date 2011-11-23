@@ -11,4 +11,6 @@ public interface BookService
     public void saveBook(Book book);
 
     public void removeBook(Long bookId);
+
+    public void assignBookToCategories(String[] categories, Long bookId);
 }

@@ -1,7 +1,8 @@
 CategoriesMultiSelectComponent = Ext.extend(Object, {
 
-    createMultiSelectWidget : function(selectionModel)
+    createMultiSelectWidget : function(booksGrid)
     {
+        this.booksGrid = booksGrid;
         var categoryJsonReader = new Ext.data.JsonReader({
             idProperty: 'id',
             root: 'data',
@@ -37,7 +38,12 @@ CategoriesMultiSelectComponent = Ext.extend(Object, {
                         {
                             Ext.Ajax.request({
                                 url: '/books/assignBookToCategories.do',
-                                params: {categories: this.categoryMultiSelect.getRawValue(), bookId: selectionModel.getSelected().id}
+                                params: {categories: this.categoryMultiSelect.getRawValue(), bookId: this.booksGrid.getSelectionModel().getSelected().id},
+                                success: function(response, opts)
+                                {
+                                    this.booksGrid.getStore().load();
+                                },
+                                scope: this
                             });
                         },
                         scope: this

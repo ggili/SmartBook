@@ -9,7 +9,7 @@ BookGridForm.prototype =
     createGridForm : function()
     {
         this.booksGrid = this.bookGridComponent.createBookGrid();
-        this.categoryMultiSelect = new CategoriesMultiSelectComponent().createMultiSelectWidget(this.booksGrid.getSelectionModel());
+        this.categoryMultiSelect = new CategoriesMultiSelectComponent().createMultiSelectWidget(this.booksGrid);
 
         this.attachEvents();
 
@@ -42,11 +42,12 @@ BookGridForm.prototype =
     {
         this.booksGrid.getSelectionModel().on('selectionchange', function(selectionModel)
         {
+            var categories = "";
             if (selectionModel.hasSelection())
             {
-                var categories = selectionModel.getSelected().get('categoriesString');
-                this.categoryMultiSelect.setValue(categories);
+                categories = selectionModel.getSelected().get('categoriesString');
             }
+            this.categoryMultiSelect.setValue(categories);
         }, this);
     }
 };

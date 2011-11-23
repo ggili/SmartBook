@@ -32,4 +32,9 @@ public class BookServiceImpl implements BookService
     {
        bookDAO.removeBook(bookId);
     }
+
+    public void assignBookToCategories(String[] categories, Long bookId)
+    {
+        bookDAO.assignBookToCategories(categories, bookId);
+    }
 }
