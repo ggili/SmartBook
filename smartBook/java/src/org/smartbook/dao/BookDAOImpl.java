@@ -42,6 +42,7 @@ public class BookDAOImpl implements BookDAO
         hibernateTemplate.delete(bookToDelete);
     }
 
+    @Transactional
     public void assignBookToCategories(String[] categories, Long bookId)
     {
         Book editedBook = hibernateTemplate.get(Book.class, bookId);

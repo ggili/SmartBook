@@ -1,5 +1,17 @@
 CategoriesMultiSelectComponent = Ext.extend(Object, {
 
+    constructor : function(config)
+    {
+        CategoriesMultiSelectComponent.superclass.constructor.call(this, config);
+        this.createMultiSelectWidget(config.booksGrid);
+
+    },
+
+    getView : function()
+    {
+        return this.categoryMultiSelect;
+    },
+
     createMultiSelectWidget : function(booksGrid)
     {
         this.booksGrid = booksGrid;
@@ -52,7 +64,5 @@ CategoriesMultiSelectComponent = Ext.extend(Object, {
         });
 
         store.load();
-
-        return this.categoryMultiSelect;
     }
 });

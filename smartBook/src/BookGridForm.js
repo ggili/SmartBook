@@ -1,15 +1,22 @@
 BookGridForm = function(bookGridComponent, smartBookApplication)
 {
-    this.bookGridComponent = bookGridComponent;
+    this.booksGrid = bookGridComponent.getView();
     this.smartBookApplication = smartBookApplication;
+
+    this.createGridForm();
 };
 
 BookGridForm.prototype =
 {
+    getView : function()
+    {
+        return this.gridForm;
+    },
+
     createGridForm : function()
     {
-        this.booksGrid = this.bookGridComponent.createBookGrid();
-        this.categoryMultiSelect = new CategoriesMultiSelectComponent().createMultiSelectWidget(this.booksGrid);
+
+        this.categoryMultiSelect = new CategoriesMultiSelectComponent({booksGrid : this.booksGrid}).getView();
 
         this.attachEvents();
 
@@ -34,8 +41,6 @@ BookGridForm.prototype =
                 }
             ]
         });
-
-        return this.gridForm;
     },
 
     attachEvents : function()

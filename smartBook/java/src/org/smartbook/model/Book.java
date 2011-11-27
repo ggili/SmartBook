@@ -10,6 +10,7 @@ import java.util.List;
 public class Book
 {
     private static final String DELIMITER = ",";
+
     @Id
     @GeneratedValue(generator = "seq")
     @Column(name = "ID")

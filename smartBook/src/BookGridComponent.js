@@ -1,10 +1,15 @@
 BookGridComponent = function()
 {
-
+    this.createBookGrid();
 };
 
 BookGridComponent.prototype =
 {
+    getView : function()
+    {
+        return this.grid;
+    },
+
     createBookGrid : function()
     {
         var myReader = new Ext.data.JsonReader({
@@ -85,8 +90,6 @@ BookGridComponent.prototype =
         }, this);
 
         this.grid.getStore().load();
-
-        return this.grid;
     },
 
     removeBook : function()
@@ -95,15 +98,8 @@ BookGridComponent.prototype =
         var selectionModel = this.grid.getSelectionModel();
         if (selectionModel.hasSelection())
         {
-            var records = selectionModel.getSelections();
-            for (var key in records)
-            {
-                var record = records[key];
-                if (records.hasOwnProperty(key))
-                {
-                    this.grid.getStore().remove(record);
-                }
-            }
+            var record = selectionModel.getSelected();
+            this.grid.getStore().remove(record);
         }
         else
         {

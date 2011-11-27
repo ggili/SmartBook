@@ -8,13 +8,14 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORACLE"/>
         <property name="username" value="smartbook"/>
         <property name="password" value="welcome"/>
     </bean>
 
     <context:annotation-config/>
     <bean id="bookDAO" class="org.smartbook.dao.BookDAOImpl"/>
+    <bean id="categoryDAO" class="org.smartbook.dao.CategoryDAOImpl"/>
 
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/>
