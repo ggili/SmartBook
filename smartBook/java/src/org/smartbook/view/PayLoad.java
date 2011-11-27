@@ -64,14 +64,4 @@ public class PayLoad
     {
         this.data = data;
     }
-
-    public static Map<String, Object> toRawMap(List<?> list)
-    {
-        Map<String, Object> rawMap = new HashMap<String, Object>(3);
-        rawMap.put("data", list);
-        rawMap.put("total", list.size());
-        rawMap.put("success", true);
-
-        return rawMap;
-    }
 }

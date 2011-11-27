@@ -13,11 +13,17 @@ import java.io.File;
 
 public class JettyStarter
 {
+    public static final int PORT = 8080;
+
+    private JettyStarter()
+    {
+    }
+
     public static void main(String[] arg) throws Exception
     {
         setupLogging();
 
-        final Server server = new Server(8080);
+        final Server server = new Server(PORT);
         final ContextHandler root = setupHandlers(server);
 
         setupSpring(root);
@@ -28,10 +34,11 @@ public class JettyStarter
     {
         /**
          * <servlet>
-         <servlet-name>springmvc</servlet-name>
-         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-         </servlet>
+         *    <servlet-name>springmvc</servlet-name>
+         *    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+         * </servlet>
          */
+
         final ServletContextHandler handler = new ServletContextHandler(root, "", ServletContextHandler.SESSIONS);
         handler.setResourceBase(".");
         handler.addServlet(DispatcherServlet.class, "*.do");
@@ -48,12 +55,14 @@ public class JettyStarter
         final HandlerList handlers = new HandlerList();
         final ResourceHandler resourceHandler = new ResourceHandler();
 
-        resourceHandler.setResourceBase(new File("").getAbsolutePath());
+        final String absolutePath = new File("").getAbsolutePath();
+
+        resourceHandler.setResourceBase(absolutePath);
 
         handlers.addHandler(resourceHandler);
 
-        ContextHandler contextHandler = new ContextHandler(server, "/");
-        contextHandler.setResourceBase(new File("").getAbsolutePath());
+        final ContextHandler contextHandler = new ContextHandler(server, "/");
+        contextHandler.setResourceBase(absolutePath);
         handlers.addHandler(contextHandler);
 
         server.setHandler(handlers);

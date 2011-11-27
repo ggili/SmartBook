@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="setup">
+       <property name="ora.user" value="smartbook"/>
+    <property name="ora.password" value="welcome"/>
+    <property name="ora.usertablespace" value="USERS"/>
+    <property name="ora.temptablespace" value="TEMP"/>
+
+
+    <property name="ora.service" value="ORCL"/>
+    <property name="ora.host" value="localhost"/>
+    <property name="ora.port" value="1521"/>
+    <property name="ora.db" value="//${ora.host}:${ora.port}/${ora.service}"/>
+
+    <target name="exec-oracle">
+        <property name="file" value="undefined"/>
+        <property name="param" value=""/>
+        <exec command="sqlplus" failonerror="true">
+            <arg line="${ora.user}/${ora.password}@${ora.db} @${file} ${param}"/>
+        </exec>
+    </target>
+
+
+    <target name="setup-db">
+        <antcall target="exec-oracle">
+            <param name="file" value="../../smartBook/sql/schema.sql"/>
+        </antcall>
+    </target>
+</project>
