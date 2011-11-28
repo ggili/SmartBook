@@ -39,8 +39,21 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
                 scope: this
             });
         });
+
+        var treeNode3 = new Ext.tree.TreeNode({
+            text: 'Advice books'
+        });
+        treeNode3.on('click', function()
+        {
+            // form on top and grid on the bottom
+            var smartFormComponent = new SmartFormComponenet();
+            var smartGridComponent = new SmartGridComponent();
+            var adviceFormGrid = new FormGrid(smartFormComponent, smartGridComponent);
+            smartBookApplication.open(adviceFormGrid.getView())
+        });
         root.appendChild(treeNode);
         root.appendChild(treeNode2);
+        root.appendChild(treeNode3);
     }
 
 });

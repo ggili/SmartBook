@@ -48,8 +48,8 @@ ProfilesGridComponent = Ext.extend(Ext.util.Observable, {
                             sortable: true
                         },
                         columns: [
-                            {header: 'Profile Name', dataIndex: 'name', editor: new Ext.form.TextField(), allowBlank: false},
-                            {header: 'Description', dataIndex: 'description', editor: new Ext.form.TextField(), allowBlank: false},
+                            {header: 'Profile Name', dataIndex: 'name'},
+                            {header: 'Description', dataIndex: 'description'},
                             {header: 'Categories', dataIndex: 'categories', hidden: true},
                             {header: 'Id', dataIndex: 'id', hidden: true}
                         ]
