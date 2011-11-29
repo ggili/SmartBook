@@ -1,6 +1,7 @@
 package org.smartbook.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,7 +34,7 @@ public class Book
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "BOOK_CATEGORY", joinColumns = {@JoinColumn(name = "BOOK_ID")}, inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<Category>();
 
     @Transient
     private String categoriesString;
@@ -134,8 +135,39 @@ public class Book
         return stringBuilder.toString();
     }
 
+    public void addCategory(Category category)
+    {
+        this.categories.add(category);
+    }
+
     public void setCategories(List<Category> categories)
     {
         this.categories = categories;
     }
+
+    public List<Category> getCategories()
+    {
+        return categories;
+    }
+
+    public double percentMatches(List<Category> toMatch)
+    {
+        double matchPercent = 0.0;
+        if (this.categories.size() != 0)
+        {
+            int numberMatched = 0;
+            for (Category expected : toMatch)
+            {
+                if (this.categories.contains(expected))
+                {
+                    numberMatched++;
+                }
+            }
+
+            matchPercent = numberMatched / (double)toMatch.size();
+        }
+        return matchPercent;
+    }
+
+
 }

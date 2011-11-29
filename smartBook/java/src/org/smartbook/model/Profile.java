@@ -1,6 +1,7 @@
 package org.smartbook.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Profile
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PROFILE_CATEGORY", joinColumns = {@JoinColumn(name = "PROFILE_ID")}, inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<Category>();
 
     public Profile()
     {
@@ -67,5 +68,10 @@ public class Profile
     public void setCategories(List<Category> categories)
     {
         this.categories = categories;
+    }
+
+    public void addCategory(Category category)
+    {
+        categories.add(category);
     }
 }

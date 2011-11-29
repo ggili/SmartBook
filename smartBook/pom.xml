@@ -99,6 +99,15 @@
             <classifier>jdk15</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>jess</groupId>
+            <artifactId>jess</artifactId>
+            <scope>system</scope>
+            <version>71p2</version>
+            <systemPath>${basedir}/../lib/Jess71p2/lib/jess.jar</systemPath>
+
+        </dependency>
+
     </dependencies>
 
     <properties>
