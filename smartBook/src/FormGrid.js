@@ -1,8 +1,10 @@
 FormGrid = Ext.extend(Object, {
 
-    constructor : function(smartFormComponent, smartGridComponent)
+    constructor : function(profileSelector, smartGridComponent)
     {
-        this.createFormGrid(smartFormComponent, smartGridComponent);
+        this.createFormGrid(profileSelector, smartGridComponent);
+
+        this.attachControlling();
     },
 
     getView : function()
@@ -10,10 +12,19 @@ FormGrid = Ext.extend(Object, {
         return this.formGrid;
     },
 
-    createFormGrid : function(smartFormComponent, smartGridComponent)
+    attachControlling : function()
     {
-        this.smartForm = smartFormComponent.getView();
-        this.smartGrid = smartGridComponent.getView();
+        this.profileSelector.on("profileselected", function(record)
+        {
+
+        }, this);
+    },
+
+
+    createFormGrid : function(profileSelector, gridComponent)
+    {
+        this.profileSelector = profileSelector.getView();
+        this.smartGrid = gridComponent.getView();
 
         this.formGrid = new Ext.Container({
             layout: 'border',
@@ -22,14 +33,15 @@ FormGrid = Ext.extend(Object, {
                     region: 'north',
                     layout: 'fit',
                     height: 100,
-                    items: this.smartForm
+                    items: this.profileSelector
                 },
                 {
                     region: 'center',
                     layout: 'fit',
                     items: this.smartGrid
-                }]
+                }
+            ]
         });
     }
 
-})
+});

@@ -1,10 +1,10 @@
 package org.smartbook.advice;
 
 
-import jess.JessException;
-import jess.Rete;
+import jess.*;
 import org.smartbook.model.Book;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class SmartBookEngine
@@ -20,6 +20,7 @@ public class SmartBookEngine
             this.books = books;
 
             initReteEngine();
+            batch(Thread.currentThread().getContextClassLoader().getResource("org/smartbook/advice/smartBook.clp").getFile());
         }
         catch (JessException e)
         {
@@ -53,11 +54,18 @@ public class SmartBookEngine
 
     }
 
-    public void run() throws SmartBookEngineException
+    public void registerEvent(JessListener listener)
+    {
+        rete.addJessListener(listener);
+        rete.setEventMask(rete.getEventMask() | JessEvent.DEFRULE_FIRED);
+    }
+
+    public <T> Iterator<T> run(Class<T> resultClass) throws SmartBookEngineException
     {
         try
         {
             rete.run();
+            return rete.getObjects(new Filter.ByClass(resultClass));
         }
         catch (JessException e)
         {

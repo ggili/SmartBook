@@ -1,18 +1,20 @@
-SmartFormComponenet = Ext.extend(Object, {
+ProfileSelector = Ext.extend(Ext.util.Observable, {
 
     constructor : function()
     {
+        this.addEvents("profileselected");
+
         this.createSmartFormComponent();
     },
 
     getView : function()
     {
-        return this.smartForm;
+        return this.profileSelector;
     },
 
     createSmartFormComponent : function()
     {
-        this.smartForm = new Ext.form.FormPanel({
+        this.profileSelector = new Ext.form.FormPanel({
             title: 'Smart advice',
             frame: true,
             items:[
@@ -44,7 +46,15 @@ SmartFormComponenet = Ext.extend(Object, {
                         })
                     }),
                     valueField: 'id',
-                    displayField: 'name'
+                    displayField: 'name',
+                    listeners :
+                    {
+                        scope : this,
+                        select : function(combo, record, index)
+                        {
+                            this.fireEvent("profileselected", record);
+                        }
+                    }
                 }
             ]
         });

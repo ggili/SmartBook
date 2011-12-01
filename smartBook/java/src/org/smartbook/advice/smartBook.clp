@@ -3,10 +3,7 @@
 ;; it just tells Jess to examine the classes and set up templates
 ;; using their properties
 
-(import org.smartbook.model.*)
-(deftemplate Book       (declare (from-class Book)))
-(deftemplate Category   (declare (from-class Category)))
-(deftemplate Profile    (declare (from-class Profile)))
+
 
 /*
 ;; Now define the pricing rules themselves. Each rule matches a set
@@ -40,10 +37,15 @@
 
   */
 
-  (defrule java-books
+(import org.smartbook.model.*)
+(deftemplate Book       (declare (from-class Book)))
+(deftemplate Category   (declare (from-class Category)))
+(deftemplate Profile    (declare (from-class Profile)))
+
+(defrule java-books
          (Book (OBJECT ?b))
          (Profile (categories ?categories))
          (test (> (?b percentMatches  ?categories) 0.5))
         =>
-         (printout t ?b.title ?b.author ?categories  crlf))
+         (add (new org.smartbook.advice.Advice ?b ?categories)))
 

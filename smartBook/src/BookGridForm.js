@@ -18,7 +18,7 @@ BookGridForm.prototype =
 
         this.categoryMultiSelect = new CategoriesMultiSelectComponent({booksGrid : this.booksGrid}).getView();
 
-        this.attachEvents();
+        this.attachControlling();
 
         this.gridForm = new Ext.FormPanel({
             id: 'book-grid-form',
@@ -43,7 +43,7 @@ BookGridForm.prototype =
         });
     },
 
-    attachEvents : function()
+    attachControlling : function()
     {
         this.booksGrid.getSelectionModel().on('selectionchange', function(selectionModel)
         {

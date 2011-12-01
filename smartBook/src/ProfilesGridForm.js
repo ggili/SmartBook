@@ -19,7 +19,7 @@ ProfilesGridForm.prototype =
         this.profilesGrid = this.profilesGridComponent.getView();
         this.profilesForm = this.profilesFormComponent.getView();
 
-        this.attachEvents();
+        this.attachControlling();
 
         this.gridForm = new Ext.Container({
             layout: 'border',
@@ -39,7 +39,7 @@ ProfilesGridForm.prototype =
         });
     },
 
-    attachEvents : function()
+    attachControlling : function()
     {
         this.profilesFormComponent.on('savesuccess', function()
         {

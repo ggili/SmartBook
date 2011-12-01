@@ -169,5 +169,18 @@ public class Book
         return matchPercent;
     }
 
-
+    @Override
+    public String toString()
+    {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publishYear='" + publishYear + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", categories=" + categories +
+                ", categoriesString='" + categoriesString + '\'' +
+                '}';
+    }
 }

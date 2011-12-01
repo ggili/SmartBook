@@ -30,8 +30,8 @@ SmartGridComponent = Ext.extend(Object, {
                 proxy: new PlainBodyHttpProxy({
                     headers: { 'Content-Type': 'application/json' },
                     api:{
-                            load: {url: '/smartadvice/view.do'},
-                            read: {url: '/smartadvice/view.do'}
+                            load: {url: '/smartadvice/advice.do'},
+                            read: {url: '/smartadvice/advice.do'}
                         }})
             }),
             colModel: new Ext.grid.ColumnModel({
@@ -50,7 +50,5 @@ SmartGridComponent = Ext.extend(Object, {
             }),
             height: 300
         });
-
-        this.smartGrid.getStore().load();
     }
-})
+});

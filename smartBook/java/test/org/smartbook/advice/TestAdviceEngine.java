@@ -1,14 +1,15 @@
 package org.smartbook.advice;
 
 
-import jess.JessException;
-import jess.Rete;
+import org.junit.Assert;
 import org.junit.Test;
 import org.smartbook.model.Book;
 import org.smartbook.model.Category;
 import org.smartbook.model.Profile;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class TestAdviceEngine
@@ -17,7 +18,7 @@ public class TestAdviceEngine
 
     private Profile profile;
 
-    private Book makeDummyBook()
+    private List<Book> makeDummyBook()
     {
         final Book book = new Book("Some book", "Some title", "some publisher", "a year", "ibn");
         final Category category = new Category(1L, "Java");
@@ -27,17 +28,28 @@ public class TestAdviceEngine
 
         profile = new Profile("Java", "");
         profile.addCategory(category);
-        return book;
+
+        Book book2 = new Book("A", "S", "a", "A", "S");
+        return Arrays.asList(
+                book,
+                book2
+        );
     }
 
     @Test
     public void testSetup()
     {
         // Create a Jess rule engine
-        engine = new SmartBookEngine(Arrays.asList(makeDummyBook()));
-        engine.batch(Thread.currentThread().getContextClassLoader().getResource("org/smartbook/advice/smartBook.clp").getFile());
+        engine = new SmartBookEngine(makeDummyBook());
+
         engine.addObject(profile);
-        engine.run();
+        final Iterator<Advice> run = engine.run(Advice.class);
+        Assert.assertNotNull(run);
+        for (;run.hasNext();)
+        {
+            final Advice advice = run.next();
+            System.out.println(advice);
+        }
     }
 
 }

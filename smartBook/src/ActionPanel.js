@@ -46,9 +46,9 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
         treeNode3.on('click', function()
         {
             // form on top and grid on the bottom
-            var smartFormComponent = new SmartFormComponenet();
+            var profileSelector = new ProfileSelector();
             var smartGridComponent = new SmartGridComponent();
-            var adviceFormGrid = new FormGrid(smartFormComponent, smartGridComponent);
+            var adviceFormGrid = new FormGrid(profileSelector, smartGridComponent);
             smartBookApplication.open(adviceFormGrid.getView())
         });
         root.appendChild(treeNode);
