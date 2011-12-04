@@ -36,4 +36,9 @@ public class ProfileDAOImpl implements ProfileDAO
 
         hibernateTemplate.delete(profileToDelete);
     }
+
+    public Profile findProfile(long profile)
+    {
+        return hibernateTemplate.get(Profile.class, profile);
+    }
 }

@@ -27,4 +27,9 @@ public class ProfileServiceImpl implements ProfileService
     {
         profileDAO.deleteProfile(profileId);
     }
+
+    public Profile getProfile(long profile)
+    {
+        return profileDAO.findProfile(profile);
+    }
 }

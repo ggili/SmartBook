@@ -1,6 +1,7 @@
 package org.smartbook.service;
 
 import org.smartbook.model.Book;
+import org.smartbook.model.Profile;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Advice
 {
-    private Book book;
+    private transient Book book;
 
     private double percent;
 
@@ -17,6 +17,16 @@ public class Advice
     {
         this.book = book;
         this.percent = book.percentMatches(categoryList);
+    }
+
+    public String getTitle()
+    {
+        return book.getAuthor() + "-" + book.getTitle();
+    }
+
+    public double getPercent()
+    {
+        return percent;
     }
 
     @Override

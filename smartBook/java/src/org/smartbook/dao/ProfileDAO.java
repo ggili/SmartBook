@@ -11,4 +11,6 @@ public interface ProfileDAO
     Profile saveProfile(Profile profile);
 
     void deleteProfile(Long profileId);
+
+    Profile findProfile(long profile);
 }

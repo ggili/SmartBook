@@ -19,7 +19,7 @@ SmartGridComponent = Ext.extend(Object, {
             idProperty: 'id',
             fields: [
                 {name: 'title', mapping: 'title'},
-                {name: 'publishYear', mapping: 'publishYear'}
+                {name: 'percent', mapping: 'percent'}
             ]
         });
 
@@ -41,8 +41,8 @@ SmartGridComponent = Ext.extend(Object, {
                     sortable: true
                 },
                 columns: [
-                    {header: 'Title', dataIndex: 'title'},
-                    {header: 'Publish Year', dataIndex: 'publishYear'}
+                    {header: 'Title', dataIndex: 'title', width : 700},
+                    {header: 'Percent matching', dataIndex: 'percent'}
                 ]
             }),
             selModel: new Ext.grid.RowSelectionModel({

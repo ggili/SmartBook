@@ -16,6 +16,9 @@ FormGrid = Ext.extend(Object, {
     {
         this.profileSelector.on("profileselected", function(record)
         {
+            var profile = record.id;
+
+            this.smartGrid.getStore().load({params :{jsonData : profile}});
 
         }, this);
     },
@@ -23,7 +26,8 @@ FormGrid = Ext.extend(Object, {
 
     createFormGrid : function(profileSelector, gridComponent)
     {
-        this.profileSelector = profileSelector.getView();
+        this.profileSelector = profileSelector;
+        this.profileSelectorView = profileSelector.getView();
         this.smartGrid = gridComponent.getView();
 
         this.formGrid = new Ext.Container({
@@ -33,7 +37,7 @@ FormGrid = Ext.extend(Object, {
                     region: 'north',
                     layout: 'fit',
                     height: 100,
-                    items: this.profileSelector
+                    items: this.profileSelectorView
                 },
                 {
                     region: 'center',

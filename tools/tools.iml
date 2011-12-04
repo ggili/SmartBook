@@ -44,6 +44,7 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.0" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.5" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" level="project" />
+    <orderEntry type="library" name="Maven: jess:jess:71p2" level="project" />
     <orderEntry type="library" name="Maven: org.mortbay.jetty:jboss-jetty:8.0.0.v20110901" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-ajp:8.0.0.v20110901" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:8.0.0.v20110901" level="project" />

@@ -11,4 +11,6 @@ public interface ProfileService
     public Profile saveProfile(Profile profile);
 
     public void deleteProfile(Long profileId);
+
+    Profile getProfile(long profile);
 }

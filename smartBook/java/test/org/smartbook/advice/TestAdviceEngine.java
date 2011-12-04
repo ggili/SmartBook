@@ -8,7 +8,6 @@ import org.smartbook.model.Category;
 import org.smartbook.model.Profile;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -42,12 +41,10 @@ public class TestAdviceEngine
         // Create a Jess rule engine
         engine = new SmartBookEngine(makeDummyBook());
 
-        engine.addObject(profile);
-        final Iterator<Advice> run = engine.run(Advice.class);
+        final List<Advice> run = engine.adviceBooks(profile);
         Assert.assertNotNull(run);
-        for (;run.hasNext();)
+        for (Advice advice : run)
         {
-            final Advice advice = run.next();
             System.out.println(advice);
         }
     }

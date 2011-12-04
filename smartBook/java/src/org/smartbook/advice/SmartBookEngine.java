@@ -3,7 +3,10 @@ package org.smartbook.advice;
 
 import jess.*;
 import org.smartbook.model.Book;
+import org.smartbook.model.Profile;
 
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +15,8 @@ public class SmartBookEngine
     private final List<Book> books;
 
     private Rete rete;
+
+    private WorkingMemoryMarker workingMemoryMarker;
 
     public SmartBookEngine(List<Book> books)
     {
@@ -39,9 +44,10 @@ public class SmartBookEngine
         }
 
         rete.reset();
+        workingMemoryMarker = rete.mark();
     }
 
-    public void batch(String file)
+    private void batch(String file)
     {
         try
         {
@@ -54,18 +60,29 @@ public class SmartBookEngine
 
     }
 
-    public void registerEvent(JessListener listener)
-    {
-        rete.addJessListener(listener);
-        rete.setEventMask(rete.getEventMask() | JessEvent.DEFRULE_FIRED);
-    }
-
-    public <T> Iterator<T> run(Class<T> resultClass) throws SmartBookEngineException
+    public List<Advice> adviceBooks(Profile profile) throws SmartBookEngineException
     {
         try
         {
+            rete.resetToMark(workingMemoryMarker);
+            addObject(profile);
             rete.run();
-            return rete.getObjects(new Filter.ByClass(resultClass));
+
+             final Iterator<Advice> objects = rete.getObjects(new Filter.ByClass(Advice.class));
+
+            return Collections.<Advice>list(new Enumeration<Advice>()
+            {
+                public boolean hasMoreElements()
+                {
+                    return objects.hasNext();
+                }
+
+                public Advice nextElement()
+                {
+                    return objects.next();
+                }
+            });
+
         }
         catch (JessException e)
         {
