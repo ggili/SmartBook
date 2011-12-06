@@ -1,6 +1,9 @@
 ActionPanel = function(smartBookApplication)
 {
-    var root = new Ext.tree.TreeNode('SmartBook Actions');
+    var root = new Ext.tree.TreeNode({
+        text: 'SmartBook Actions',
+        iconCls: 'smart-book-root'
+    });
     this.makeNavigableActions(root, smartBookApplication);
     ActionPanel.superclass.constructor.call(this, {root: root});
 
@@ -11,7 +14,8 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
     makeNavigableActions : function(root, smartBookApplication)
     {
         var treeNode = new Ext.tree.TreeNode({
-            text: 'Manage books'
+            text: 'Manage books',
+            iconCls: 'smart-book-books'
         });
         treeNode.on('click', function()
         {
@@ -23,7 +27,8 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
 
 
         var treeNode2 = new Ext.tree.TreeNode({
-            text: 'Manage profiles'
+            text: 'Manage profiles',
+            iconCls: 'smart-book-profiles'
         });
         treeNode2.on('click', function()
         {
@@ -41,7 +46,8 @@ Ext.extend(ActionPanel, Ext.tree.TreePanel, {
         });
 
         var treeNode3 = new Ext.tree.TreeNode({
-            text: 'Advice books'
+            text: 'Advice books',
+            iconCls: 'smart-book-advice'
         });
         treeNode3.on('click', function()
         {

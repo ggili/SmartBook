@@ -1,0 +1,15 @@
+.smart-book-root {
+    background-image: url(../images/Books.png) !important;
+}
+
+.smart-book-books {
+    background-image: url(../images/Notepad.png) !important;
+}
+
+.smart-book-profiles {
+    background-image: url(../images/ID.png) !important;
+}
+
+.smart-book-advice {
+    background-image: url(../images/Advice.png) !important;
+}
